@@ -17,6 +17,9 @@ let buttonClicked = false,
 
     // Indent left fot "burger-content"
     burgerContent.style.left = -documentWidth + 'px';
+    if (documentWidth < 681) {
+    burgerContent.style.display = 'block';
+    }
 
 // Back to top button
 (function() {
@@ -49,6 +52,12 @@ window.addEventListener('scroll', trackScroll);
 goTopBtn.addEventListener('click', backToTop);
 
 })();
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     if (documentWidth < 681) {
+//         burgerContent.style.display = "block";
+//     }
+// });
 
 // Hide/Show left sidebar
 menu_button.addEventListener('click', function(){
@@ -96,7 +105,7 @@ function burderShow(show) {burgerContent.style.display = "'" + show + "'"}
 
 burgerMenu.addEventListener('click', function() {
     if (clicked == false) {
-        burgerContent.style.transition = 'all 0.2s ease 0s'
+        burgerContent.style.transition = 'left 0.2s';
         burgerContent.style.left = 0;
         document.body.classList.add('hide');
         for (i in pres) {

@@ -214,7 +214,7 @@ img {
 }
 
 .burger-content {
-    display: block;
+    display: none;
     position: fixed;
     opacity: 1;
     z-index: 9995;
