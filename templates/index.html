@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>owl</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='codehilite.css')}}">
+</head>
+<body>
+
+<div class="burger"><img src="{{ url_for('static', filename='menu_button.svg')}}"></div>
+<div class="burger-content">
+	{{ contents|safe }}
+</div>
+
+<div class="menu-button"><img src="{{ url_for('static', filename='menu_button.svg')}}"></div>
+<div class="back-to-top"><img src="{{ url_for('static', filename='up_button.svg')}}"></div>
+
+<div class="main-box">
+	<div class="menu">
+
+		{{ contents|safe }}
+
+	</div>
+	<div class="menu-box"></div>
+
+	<div class="content">
+		<div class="article">
+
+		{{ article|safe }}
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='script.js')}}"></script>
+</body>
+</html>
