@@ -20,7 +20,7 @@ source env/bin/activate
 Clone repo and install requirements:
 
 ```Bash
-git clone https://
+git clone https://github.com/gechandesu/owl.git
 cd owl
 pip install -r requirements.txt
 ```
