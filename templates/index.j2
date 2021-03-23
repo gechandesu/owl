@@ -1,0 +1,69 @@
+{% extends 'base.j2' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Header bar -->
+<div class="headerbar">
+    <!-- Sidebar toggle button -->
+    <div class="sidebar-toggle-btn">
+        <i class="bi bi-layout-sidebar-inset"></i>
+    </div>
+</div>
+
+<nav class="sidebar">
+    <!-- Sidebar content -->
+    {{ contents | safe }}
+</nav>
+
+<main class="content">
+    <!-- Page main content -->
+    <div class="blank-1"></div>
+    <div class="blank-2"></div>
+    {# CURRENT PATH {{ current_path }} #}
+    <article>
+        {{ article | safe }}
+        <div class="blank-2"></div>
+
+        <!-- Pagination -->
+        {% for link in links %}
+            {% if link == current_path %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6" style="float: left; padding: 0 15px 0 0;">
+                            {% if (links.index(link) - 1) > -1 %}
+                                <div class="list-group">
+                                    <a href="{{ links[links.index(link) - 1] }}" class="list-group-item list-group-item-action">
+                                        <small class="mb-1">Previous</small>
+                                        {% if links[links.index(link) - 1] == '/' %}
+                                            {# Unique handler for root URL #}
+                                            <h5 class="mb-1">« {{ get_title('HOME/') }}</h5>
+                                        {% else %}
+                                            <h5 class="mb-1">« {{ get_title(links[links.index(link) - 1]) }}</h5>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-6" style="float: right; padding: 0 0 0 15px;">
+                            {% if (links.index(link) + 1) <= (get_len(links) - 1) %}
+                                <div class="list-group">
+                                    <a href="{{ links[links.index(link) + 1] }}" class="list-group-item list-group-item-action" style="text-align: right;">
+                                        <small class="mb-1">Next</small>
+                                        <h5 class="mb-1">{{ get_title(links[links.index(link) + 1]) }} »</h5>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </article>
+    <div class="blank-5"></div>
+</main>
+
+{% endblock %}

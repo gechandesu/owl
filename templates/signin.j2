@@ -1,0 +1,22 @@
+{% extends 'base.j2' %}
+
+{% block title %}
+    Sign in
+{% endblock %}
+
+{% block content %}
+
+<main class="form-signin">
+    <form action="/signin/" method="POST">
+        <center><h1 class="title-h">@v@</h1></center>
+        <div class="blank-1"></div>
+        {% if wrong_pw %}
+            <p><center  style="color: #ff0000;">Wrong password.</center></p>
+        {% endif %}
+        <label for="inputPassword" class="visually-hidden">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="w-100 btn btn-lg btn-primary btn-dark" type="submit">Sign in</button>
+    </form>
+</main>
+
+{% endblock %}
