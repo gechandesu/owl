@@ -23,12 +23,6 @@
     </head>
     <body>
 
-        {% if session['logged_in'] %}
-            <div class="signout-btn">
-                <a href="/signout/" title="Sign out"><i class="bi bi-box-arrow-right"></i></a>
-            </div>
-        {% endif %}
-
         {% block content %}
             No content here
         {% endblock %}

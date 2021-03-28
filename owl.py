@@ -1,10 +1,12 @@
+__version__ = '1.1'
+
 import os
 import re
 from functools import wraps
 from datetime import timedelta
 
 import pygments
-from markdown2 import Markdown
+from markdown import Markdown
 
 from flask import Flask
 from flask import request
@@ -30,31 +32,35 @@ def read_file(filepath: str) -> str:
     except IOError:
         return 'Error: Cannot read file: {}'.format(filepath)
 
+def get_path(path: str) -> str:
+    return os.path.join(app.config['MARKDOWN_ROOT'], path)
+
 def render_html(filepath: str) -> str:
-    markdown = Markdown(extras=app.config['MARKDOWN2_EXTRAS'])
-    return markdown.convert(
-                    read_file(
-                        app.config['MARKDOWN_ROOT'] + filepath
-                    )
-                )
+    html = Markdown(
+                extensions = app.config['MARKDOWN_EXTRAS'],
+                extension_configs = app.config['MARKDOWN_EXTRAS_CONFIGS']
+            )
+    return html.convert(
+            read_file(get_path(filepath))
+        )
 
 def parse_title_from_markdown(filepath: str) -> str:
     # This function parses article title from first level heading.
     # It returns the occurrence of the first heading, and there
     # can be nothing before it except empty lines and spaces.
-    article = read_file(app.config['MARKDOWN_ROOT'] + filepath)
+    article = read_file(get_path(filepath))
     pattern = re.compile(r'^\s*#\s.*')
     if pattern.search(article):
         return pattern.search(article).group().strip()[2:]
     else:
-        return 'Error: Cannot parse title from file:'.format(filepath)
+        return 'Error: Cannot parse title from file: {}'.format(filepath)
 
 def parse_content_links(filepath: str) -> list:
     # This function returns a list of links from a Markdown file.
     # Only links contained in the list (ul ol li) are parsed.
     r = re.compile(r'(.*(-|\+|\*|\d).?\[.*\])(\(.*\))', re.MULTILINE)
     links = []
-    for tpl in r.findall(read_file(app.config['MARKDOWN_ROOT'] + filepath)):
+    for tpl in r.findall(read_file(get_path(filepath))):
         for item in tpl:
             if re.match(r'\(.*\)', item):
                 if item == '(/)':
@@ -67,8 +73,8 @@ def parse_content_links(filepath: str) -> list:
     return links
 
 def check_password(password: str) -> bool:
-    if os.path.exists('.pw'):
-        pw_hash = read_file('.pw')
+    if os.path.exists(app.config['PASSWORD_FILE']):
+        pw_hash = read_file(app.config['PASSWORD_FILE'])
         return bcrypt.check_password_hash(pw_hash, password)
     else:
         return False
@@ -129,7 +135,7 @@ def index():
 @app.route('/<path:path>/')
 @login_required
 def get_article(path):
-    if os.path.exists(app.config['MARKDOWN_ROOT'] + path + '.md'):
+    if os.path.exists(get_path(path) + '.md'):
         return render_template(
             'index.j2',
             title = parse_title_from_markdown(path + '.md'),
@@ -144,7 +150,7 @@ def get_article(path):
 @app.route('/<path:path>.md')
 @login_required
 def download_article(path):
-    if os.path.exists(app.config['MARKDOWN_ROOT'] + path + '.md') \
+    if os.path.exists(get_path(path) + '.md') \
     and app.config['MARKDOWN_DOWLOADS']:
         return send_from_directory(
             app.config['MARKDOWN_ROOT'],

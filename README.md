@@ -1,6 +1,6 @@
 # owl
 
-![](https://img.shields.io/badge/owl-v1.0-%2300f)
+![](https://img.shields.io/badge/owl-v1.1-blueviolet)
 
 **owl** — is the minimalistic kn**owl**edge base web app written in Python.
 
@@ -22,13 +22,11 @@ App is now available at [http://localhost:5000/](http://localhost:5000/).
 
 This solution is suitable for creating documentation or maintaining a personal knowledge base.
 
-New in `v1.0`:
-- This is brand new owl!
-- New frontend and refactored backend.
-- Bootstrap 5
-- Optional authentication.
+New in `v1.1`:
+- Switched to [Python-Markdown](https://github.com/Python-Markdown/markdown).
+- Added some new Markdown extensions.
 
-See [CHANGELOG.md](CHANGELOG.md)
+See [CHANGELOG.md](CHANGELOG.md).
 
 # License
 

@@ -1,6 +1,16 @@
-# @v@ owl took off!
+# owl took off!
 
-Read the [Docs](https://owl.gch.icu/docs/) to get started.
+<pre class='raw'>
+ ,   ,
+ /\ /\
+((@v@))
+((;;; (\
+ \ ;;; \'
+  ,V.V  `
+ `` ``
+</pre>
 
-Also there is project's [git repository](https://gitea.gch.icu/gd/owl) ([mirror](https://github.com/gechandesu/owl)).
+Read the [Docs](https://owl.gch.icu/docs/){target="_blank"} to get started.
+
+Also there is project's [git repository](https://gitea.gch.icu/gd/owl) ([mirror on GitHub](https://github.com/gechandesu/owl)).
 

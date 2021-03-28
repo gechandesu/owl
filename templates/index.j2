@@ -6,34 +6,38 @@
 
 {% block content %}
 
-<!-- Header bar -->
 <div class="headerbar">
-    <!-- Sidebar toggle button -->
+    {# Sidebar toggle button #}
     <div class="sidebar-toggle-btn">
         <i class="bi bi-layout-sidebar-inset"></i>
     </div>
+    {# Sign out button #}
+    {% if session['logged_in'] %}
+        <div class="signout-btn">
+            <a href="/signout/" title="Sign out"><i class="bi bi-box-arrow-right"></i></a>
+        </div>
+    {% endif %}
 </div>
 
 <nav class="sidebar">
-    <!-- Sidebar content -->
+    {# Sidebar content #}
     {{ contents | safe }}
 </nav>
 
 <main class="content">
-    <!-- Page main content -->
+    {# Page main content #}
     <div class="blank-1"></div>
     <div class="blank-2"></div>
-    {# CURRENT PATH {{ current_path }} #}
     <article>
         {{ article | safe }}
         <div class="blank-2"></div>
 
-        <!-- Pagination -->
+        {# Pagination #}
         {% for link in links %}
             {% if link == current_path %}
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6" style="float: left; padding: 0 15px 0 0;">
+                        <div class="col-sm-6 float-sm-start" style="margin-top: 8px;">
                             {% if (links.index(link) - 1) > -1 %}
                                 <div class="list-group">
                                     <a href="{{ links[links.index(link) - 1] }}" class="list-group-item list-group-item-action">
@@ -42,18 +46,18 @@
                                             {# Unique handler for root URL #}
                                             <h5 class="mb-1">« {{ get_title('HOME/') }}</h5>
                                         {% else %}
-                                            <h5 class="mb-1">« {{ get_title(links[links.index(link) - 1]) }}</h5>
+                                            <h5 class="mb-1">« {{ get_title(links[links.index(link) - 1][1:]) }}</h5>
                                         {% endif %}
                                     </a>
                                 </div>
                             {% endif %}
                         </div>
-                        <div class="col-sm-6" style="float: right; padding: 0 0 0 15px;">
+                        <div class="col-sm-6 float-sm-end" style="margin-top: 8px;">
                             {% if (links.index(link) + 1) <= (get_len(links) - 1) %}
                                 <div class="list-group">
                                     <a href="{{ links[links.index(link) + 1] }}" class="list-group-item list-group-item-action" style="text-align: right;">
                                         <small class="mb-1">Next</small>
-                                        <h5 class="mb-1">{{ get_title(links[links.index(link) + 1]) }} »</h5>
+                                        <h5 class="mb-1">{{ get_title(links[links.index(link) + 1][1:]) }} »</h5>
                                     </a>
                                 </div>
                             {% endif %}

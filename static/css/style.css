@@ -1,6 +1,6 @@
 body {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 19px;
+    font-size: 18px;
 }
 
 h1,
@@ -41,10 +41,28 @@ blockquote {
 
 blockquote p { margin: 0; }
 
+dl dt {
+    padding:0;
+    margin-top:16px;
+    font-size:1em;
+    font-style:italic;
+    font-weight:bold
+}
+
+dl dd {
+    padding:0 2rem;
+    margin-bottom:16px
+}
+
+/* Delete margin for admonitions */
+.alert p:last-child {
+    margin: 0;
+    padding: 0;
+}
+
 /* Details and summary */
 
 details, summary {
-    display: block;
     margin: 1rem 0;
     transition: 200ms linear;
 }
@@ -54,37 +72,13 @@ summary {
     transition: .3s;
 }
 
-/* Hide defaul marker */
-details > summary { list-style: none; }
-details summary::-webkit-details-marker { display: none; }
-
 details[open] summary ~ * {
   animation: open 0.3s ease-in-out;
 }
 
 @keyframes open {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-details summary:before {
-    content: '+';
-    font-family: 'Ubuntu Mono';
-    font-size: 20px;
-    display: inline-flex;
-    padding: 0 0.3rem;
-}
-
-details[open] summary:before {
-    content: '-';
-    font-family: 'Ubuntu Mono';
-    font-size: 20px;
-    display: inline-flex;
-    padding: 0 0.3rem;
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Code styling */
@@ -92,7 +86,7 @@ details[open] summary:before {
 code,
 pre {
     font-family: 'Ubuntu Mono', monospace;
-    font-size: 19px;
+    font-size: 18px;
     color: #d0d0d0;
 }
 
@@ -111,7 +105,7 @@ code {
     border-radius: 6px;
 }
 
-.raw-pre {
+.raw {
     color: unset;
     background: unset;
 }
@@ -168,15 +162,6 @@ code {
     text-align: center;
 }
 
-/* Header bar */
-
-.header {
-    display: block;
-    position: fixed;
-    height: 5rem;
-    background: unset;
-}
-
 /* Sidebar */
 
 .sidebar-toggle-btn {
@@ -226,6 +211,13 @@ code {
 }
 
 .sidebar a:hover { text-decoration: underline; }
+
+.sidebar h1,
+.sidebar h2,
+.sidebar h3,
+.sidebar h4 {
+    margin-left: 1rem;
+}
 
 .sidebar ul,
 .sidebar ol,
@@ -301,7 +293,8 @@ article.wide { max-width: 980px; }
 @media (max-width: 1200px) {
     .header { background: #ffffff; }
     .sidebar { left: -300px; }
-    .sidebar-toggle-btn { left: 1rem; }
+    .sidebar-toggle-btn { left: 0.5rem; }
+    .signout-btn { right: 0.5rem; }
     .content { margin-left: 0px; }
     .sidebar.hide { left: 0px; }
     .sidebar-toggle-btn.click { left: 316px; }

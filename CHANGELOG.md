@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.1 2021.03.28
+
+### Added
+
+- **owl** switched to `markdown` module.
+- `markdown_alerts` extension. Short admonition syntax.
+- `markdown_del_ins` extension. Deleted and inserted text support.
+
+### Changed
+
+- Fixed `PASSWORD_FILE` detecting.
+- Fixed path resolving. Now uses `os.path.join()`.
+
+### Removed
+
+- `markdown2`. Replaced by `markdown` module.
+
 ## v1.0 2021.03.23
 
 ### Added
